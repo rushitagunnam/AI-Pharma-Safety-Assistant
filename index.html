@@ -1,0 +1,479 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>PharmaAI — Drug Safety Platform</title>
+  <link rel="stylesheet" href="style.css" />
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.min.js"></script>
+</head>
+<body>
+
+  <!-- ═══════════════════════════════════════
+       SIDEBAR
+  ════════════════════════════════════════ -->
+  <aside class="sidebar" id="sidebar">
+
+    <!-- Brand -->
+    <div class="sidebar-brand">
+      <div class="brand-logo">💊</div>
+      <div class="brand-text">
+        <div class="brand-name">Pharma<span>AI</span></div>
+        <div class="brand-sub">Safety Platform</div>
+      </div>
+    </div>
+
+    <!-- Navigation -->
+    <nav class="sidebar-nav">
+      <span class="nav-section-label">Modules</span>
+
+      <button class="nav-item active" data-tab="interaction-checker">
+        <svg viewBox="0 0 24 24">
+          <path d="M8 7h8M8 12h8M8 17h4"/>
+          <rect x="3" y="3" width="18" height="18" rx="3"/>
+        </svg>
+        Drug Interaction Checker
+      </button>
+
+      <button class="nav-item" data-tab="drug-search">
+        <svg viewBox="0 0 24 24">
+          <circle cx="11" cy="11" r="8"/>
+          <line x1="21" y1="21" x2="16.65" y2="16.65"/>
+        </svg>
+        Drug Information Search
+      </button>
+
+      <button class="nav-item" data-tab="adverse-events">
+        <svg viewBox="0 0 24 24">
+          <path d="M10.29 3.86L1.82 18a2 2 0 001.71 3h16.94a2 2 0 001.71-3L13.71 3.86a2 2 0 00-3.42 0z"/>
+          <line x1="12" y1="9" x2="12" y2="13"/>
+          <line x1="12" y1="17" x2="12.01" y2="17"/>
+        </svg>
+        Adverse Event Analyzer
+      </button>
+
+      <button class="nav-item" data-tab="safety-dashboard">
+        <svg viewBox="0 0 24 24">
+          <rect x="3" y="3" width="7" height="7" rx="1"/>
+          <rect x="14" y="3" width="7" height="7" rx="1"/>
+          <rect x="14" y="14" width="7" height="7" rx="1"/>
+          <rect x="3" y="14" width="7" height="7" rx="1"/>
+        </svg>
+        Safety Dashboard
+      </button>
+    </nav>
+
+    <!-- System status -->
+    <div class="sidebar-status">
+      <span class="nav-section-label">System</span>
+      <div class="status-item">
+        <span class="status-dot green"></span>Healthcare Analytics
+      </div>
+      <div class="status-item">
+        <span class="status-dot blue"></span>Pharmacovigilance
+      </div>
+      <div class="status-item">
+        <span class="status-dot orange"></span>Signal Detection
+      </div>
+    </div>
+
+    <!-- ── Theme Toggle ── -->
+    <div class="sidebar-settings">
+      <span class="nav-section-label">Settings</span>
+      <div class="theme-toggle-row">
+        <div class="theme-toggle-label">
+          <span class="theme-icon" id="theme-icon">☀️</span>
+          <span id="theme-label">Light Mode</span>
+        </div>
+        <button class="theme-switch" id="theme-toggle-btn" aria-label="Toggle theme" role="switch" aria-checked="false">
+          <span class="theme-switch-thumb"></span>
+        </button>
+      </div>
+    </div>
+
+    <!-- Disclaimer -->
+    <div class="sidebar-footer">
+      <div class="footer-disclaimer">
+        <strong>⚠ Clinical Reference Only</strong>
+        Not for patient-specific decisions. Always consult a qualified healthcare professional.
+      </div>
+    </div>
+
+    <!-- Developer Card -->
+    <div class="dev-card">
+      <div class="dev-avatar">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M12 12c2.7 0 4.8-2.1 4.8-4.8S14.7 2.4 12 2.4 7.2 4.5 7.2 7.2 9.3 12 12 12z"/>
+          <path d="M3.6 21.6c0-4.6 3.8-8.4 8.4-8.4s8.4 3.8 8.4 8.4"/>
+        </svg>
+      </div>
+      <div class="dev-info">
+        <div class="dev-label">Developed By</div>
+        <div class="dev-name">Rushita Gunnam</div>
+        <div class="dev-role">
+          <span class="dev-pill">B.Pharm Graduate</span>
+        </div>
+      </div>
+    </div>
+
+  </aside>
+
+  <!-- Mobile overlay -->
+  <div class="sidebar-overlay" id="sidebarOverlay"></div>
+
+  <!-- ═══════════════════════════════════════
+       MAIN WRAPPER
+  ════════════════════════════════════════ -->
+  <div class="main-wrapper">
+
+    <!-- ── Header ── -->
+<header class="app-header app-header--hero">
+  <button class="hamburger" id="hamburger" aria-label="Toggle navigation">
+    <span></span><span></span><span></span>
+  </button>
+
+  <div class="header-hero-content">
+    <div class="header-hero-left">
+      <div class="header-hero-eyebrow">
+        <span class="hero-dot"></span>
+        AI-Powered Platform
+      </div>
+      <h1 class="header-hero-title">
+        <span class="hero-emoji">💊</span>
+        AI Pharma Safety Assistant
+      </h1>
+      <p class="header-hero-subtitle">
+        Intelligent Drug Safety, Interaction &amp; Pharmacovigilance Platform
+      </p>
+    </div>
+
+    <div class="header-hero-right">
+      <div class="live-badge">
+        <span class="pulse-dot"></span>
+        System Active
+      </div>
+      <div class="header-divider"></div>
+      <span class="header-version">v2.4.1</span>
+    </div>
+  </div>
+
+  <!-- Decorative gradient orbs -->
+  <div class="hero-orb hero-orb-1"></div>
+  <div class="hero-orb hero-orb-2"></div>
+</header>
+
+    <!-- ── Content ── -->
+    <main class="content-area">
+
+
+      <!-- ───────────────────────────────────
+           TAB 1 — DRUG INTERACTION CHECKER
+      ────────────────────────────────────── -->
+      <section class="tab-panel active" id="interaction-checker">
+
+        <div class="panel-header">
+          <div class="panel-eyebrow">Module 01</div>
+          <h2 class="panel-title">Drug Interaction Checker</h2>
+          <p class="panel-subtitle">Identify clinically significant pharmacological interactions between two agents using AI analysis.</p>
+        </div>
+
+        <div class="card form-card">
+          <div class="form-grid">
+            <div class="field-group">
+              <label for="drug1-input">Drug 1</label>
+              <input id="drug1-input" type="text" placeholder="e.g. Warfarin" autocomplete="off" />
+              <div class="autocomplete-list" id="drug1-list"></div>
+            </div>
+
+            <div class="interaction-arrow">⇌</div>
+
+            <div class="field-group">
+              <label for="drug2-input">Drug 2</label>
+              <input id="drug2-input" type="text" placeholder="e.g. Aspirin" autocomplete="off" />
+              <div class="autocomplete-list" id="drug2-list"></div>
+            </div>
+          </div>
+
+          <button class="btn-primary" id="check-interaction-btn">
+            <svg viewBox="0 0 24 24"><path d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+            Check Interaction
+          </button>
+        </div>
+
+        <div id="interaction-result"></div>
+      </section>
+
+
+      <!-- ───────────────────────────────────
+           TAB 2 — DRUG INFORMATION SEARCH
+      ────────────────────────────────────── -->
+      <section class="tab-panel" id="drug-search">
+
+        <div class="panel-header">
+          <div class="panel-eyebrow">Module 02</div>
+          <h2 class="panel-title">Drug Information Search</h2>
+          <p class="panel-subtitle">Retrieve comprehensive pharmaceutical data, mechanisms, side effects, and clinical warnings.</p>
+        </div>
+
+        <div class="card form-card">
+          <div class="field-group" style="max-width:520px">
+            <label for="drug-search-input">Drug Name or Generic</label>
+            <div class="search-row">
+              <input id="drug-search-input" type="text" placeholder="e.g. Metformin" autocomplete="off" />
+              <button class="btn-primary" id="search-drug-btn">
+                <svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+                Search
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <div id="drug-search-result"></div>
+      </section>
+
+
+      <!-- ───────────────────────────────────
+           TAB 3 — ADVERSE EVENT ANALYZER
+      ────────────────────────────────────── -->
+      <section class="tab-panel" id="adverse-events">
+
+        <div class="panel-header">
+          <div class="panel-eyebrow">Module 03</div>
+          <h2 class="panel-title">Adverse Event Analyzer</h2>
+          <p class="panel-subtitle">AI-driven triage and severity assessment of reported adverse drug reactions and events.</p>
+        </div>
+
+        <div class="card form-card">
+          <div class="form-grid two-col">
+            <div class="field-group">
+              <label for="ae-drug">Drug Name</label>
+              <input id="ae-drug" type="text" placeholder="e.g. Warfarin" autocomplete="off" />
+            </div>
+            <div class="field-group">
+              <label for="ae-event">Reported Event / Symptom</label>
+              <input id="ae-event" type="text" placeholder="e.g. unexpected bleeding" autocomplete="off" />
+            </div>
+          </div>
+
+          <button class="btn-primary" id="analyze-ae-btn">
+            <svg viewBox="0 0 24 24">
+              <path d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z"/>
+            </svg>
+            Analyze Event
+          </button>
+        </div>
+
+        <div id="ae-result"></div>
+      </section>
+
+
+      <!-- ───────────────────────────────────
+           TAB 4 — SAFETY DASHBOARD
+      ────────────────────────────────────── -->
+      <section class="tab-panel" id="safety-dashboard">
+
+        <div class="panel-header">
+          <div class="panel-eyebrow">Module 04</div>
+          <h2 class="panel-title">Safety Dashboard</h2>
+          <p class="panel-subtitle">Enterprise pharmacovigilance metrics, signal detection, and risk monitoring at a glance.</p>
+        </div>
+
+        <!-- KPI row -->
+        <div class="kpi-grid" id="kpi-grid">
+
+          <div class="kpi-card">
+            <div class="kpi-icon blue">
+              <svg viewBox="0 0 24 24">
+                <path d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2"/>
+              </svg>
+            </div>
+            <div class="kpi-body">
+              <div class="kpi-value" id="kpi-total">—</div>
+              <div class="kpi-label">Interaction Assessments</div>
+              <div class="kpi-trend neutral" id="kpi-total-trend">—</div>
+            </div>
+          </div>
+
+          <div class="kpi-card red-accent">
+            <div class="kpi-icon red">
+              <svg viewBox="0 0 24 24">
+                <path d="M10.29 3.86L1.82 18a2 2 0 001.71 3h16.94a2 2 0 001.71-3L13.71 3.86a2 2 0 00-3.42 0z"/>
+                <line x1="12" y1="9" x2="12" y2="13"/>
+                <line x1="12" y1="17" x2="12.01" y2="17"/>
+              </svg>
+            </div>
+            <div class="kpi-body">
+              <div class="kpi-value" id="kpi-high">—</div>
+              <div class="kpi-label">Critical Safety Signals</div>
+              <div class="kpi-trend up" id="kpi-high-trend">—</div>
+            </div>
+          </div>
+
+          <div class="kpi-card orange-accent">
+            <div class="kpi-icon orange">
+              <svg viewBox="0 0 24 24">
+                <path d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"/>
+              </svg>
+            </div>
+            <div class="kpi-body">
+              <div class="kpi-value" id="kpi-moderate">—</div>
+              <div class="kpi-label">Moderate Risk Alerts</div>
+              <div class="kpi-trend neutral" id="kpi-moderate-trend">—</div>
+            </div>
+          </div>
+
+          <div class="kpi-card green-accent">
+            <div class="kpi-icon green">
+              <svg viewBox="0 0 24 24">
+                <path d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/>
+              </svg>
+            </div>
+            <div class="kpi-body">
+              <div class="kpi-value" id="kpi-low">—</div>
+              <div class="kpi-label">Low Risk Alerts</div>
+              <div class="kpi-trend down" id="kpi-low-trend">—</div>
+            </div>
+          </div>
+
+        </div>
+
+        <!-- Charts row -->
+        <div class="charts-grid">
+
+          <div class="card chart-card">
+            <div class="chart-header">
+              <h3>Severity Distribution</h3>
+              <span class="chart-badge">Live Data</span>
+            </div>
+            <div class="chart-wrap">
+              <canvas id="severityChart"></canvas>
+            </div>
+          </div>
+
+          <div class="card chart-card">
+            <div class="chart-header">
+              <h3>Risk Score Distribution</h3>
+              <span class="chart-badge">Live Data</span>
+            </div>
+            <div class="chart-wrap">
+              <canvas id="riskChart"></canvas>
+            </div>
+          </div>
+
+        </div>
+
+        <!-- Table -->
+        <div class="card table-card">
+          <div class="chart-header">
+            <h3>High-Risk Interactions — Top Signals</h3>
+            <span class="chart-badge red-badge">Critical</span>
+          </div>
+          <div class="table-wrapper">
+            <table id="top-interactions-table">
+              <thead>
+                <tr>
+                  <th>Drug Pair</th>
+                  <th>Severity</th>
+                  <th>Risk Score</th>
+                  <th>Description</th>
+                </tr>
+              </thead>
+              <tbody id="top-interactions-body"></tbody>
+            </table>
+          </div>
+        </div>
+
+      </section>
+
+    </main>
+  </div>
+
+  <!-- ── Welcome Popup ── -->
+<div class="welcome-overlay" id="welcomeOverlay">
+  <div class="welcome-modal" id="welcomeModal">
+
+    <div class="welcome-glow-orb orb-a"></div>
+    <div class="welcome-glow-orb orb-b"></div>
+
+    <div class="welcome-logo">
+      <span>💊</span>
+    </div>
+    
+    <div class="welcome-eyebrow">
+      <span class="welcome-dot"></span>
+      AI-Powered Platform
+    </div>
+
+    <h2 class="welcome-title">Welcome to<br/>AI Pharma Safety Assistant</h2>
+
+    <p class="welcome-desc">
+      Your intelligent companion for clinical drug safety analysis,
+      interaction screening, and pharmacovigilance monitoring.
+    </p>
+
+    <div class="welcome-features">
+      <div class="welcome-feature">
+        <div class="wf-icon blue">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M8 7h8M8 12h8M8 17h4"/><rect x="3" y="3" width="18" height="18" rx="3"/>
+          </svg>
+        </div>
+        <div class="wf-text">
+          <div class="wf-title">Drug Interaction Analysis</div>
+          <div class="wf-sub">Detect clinically significant drug-drug interactions instantly</div>
+        </div>
+      </div>
+
+      <div class="welcome-feature">
+        <div class="wf-icon purple">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/>
+          </svg>
+        </div>
+        <div class="wf-text">
+          <div class="wf-title">Drug Information Search</div>
+          <div class="wf-sub">Access comprehensive pharmaceutical profiles and warnings</div>
+        </div>
+      </div>
+
+      <div class="welcome-feature">
+        <div class="wf-icon red">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M10.29 3.86L1.82 18a2 2 0 001.71 3h16.94a2 2 0 001.71-3L13.71 3.86a2 2 0 00-3.42 0z"/>
+            <line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/>
+          </svg>
+        </div>
+        <div class="wf-text">
+          <div class="wf-title">Adverse Event Detection</div>
+          <div class="wf-sub">AI-driven triage and severity classification of ADRs</div>
+        </div>
+      </div>
+
+      <div class="welcome-feature">
+        <div class="wf-icon green">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+            <rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/>
+            <rect x="14" y="14" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/>
+          </svg>
+        </div>
+        <div class="wf-text">
+          <div class="wf-title">Safety Dashboard</div>
+          <div class="wf-sub">Real-time pharmacovigilance metrics and signal monitoring</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="welcome-disclaimer">
+      ⚠ For clinical reference only. Not for patient-specific medical decisions.
+    </div>
+
+    <div class="welcome-click-hint">
+  Click anywhere to continue →
+</div>
+
+  </div>
+</div>
+
+  <script src="script.js"></script>
+</body>
+</html>
